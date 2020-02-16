@@ -1,0 +1,32 @@
+.frame {
+  .App-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .frame {}
+
+  .trim {
+    height: 600px;
+    overflow: hidden;
+    border: 8px outset #00d9ef;
+    box-shadow: 2px 2px 30px;
+  }
+
+  .trim img {
+    object-fit: none;
+    width: 308px;
+    height: 797px;
+    filter: saturate(139%);
+  }
+
+  .img-frame {
+    border: 3px solid black;
+  }
+
+  .trime-frame {
+    // border: 3px solid black;
+  }
+}

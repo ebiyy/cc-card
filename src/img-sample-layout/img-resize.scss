@@ -1,0 +1,26 @@
+.resize {
+  .App-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .trim {
+    height: 300px;
+    overflow: hidden;
+    border: 8px outset #00d9ef;
+    box-shadow: 2px 2px 30px;
+  }
+
+  .App-logo {
+    width: 300px;
+    height: 300px;
+    filter: saturate(139%);
+    background-position: 51% 10%;
+    background-size: 236%;
+    background-repeat: no-repeat;
+    background-color: white;
+    background-blend-mode: multiply;
+  }
+}

@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import ImgSample from './img-sample-layout/img-sample';
+import ImgMarge from './img-sample-layout/img-marge';
+import ImgResize from './img-sample-layout/img-marge';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
