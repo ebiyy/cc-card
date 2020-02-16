@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+next.
+[[TypeScript] create-react-app で始めるだいたいストレスフリーな開発環境の構築 2 - Qiita](https://qiita.com/Julia0709/items/dfce1eed86e82c484040)
+
 ## Available Scripts
 
 In the project directory, you can run:
