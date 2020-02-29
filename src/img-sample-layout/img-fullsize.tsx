@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import sampleImg from '../asset/img/f354.png';
+import sampleImg from '../asset/img/f354_n.png';
 import './img-fullsize.scss';
 
 function ImgFullsize() {

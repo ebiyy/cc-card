@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
-import sampleImg from '../asset/img/f354.png';
+import sampleImg from '../asset/img/f354_n.png';
+import sampleImg2 from '../asset/img/shinpi_RARE_back.png';
 import './img-sample.scss';
 
 function ImgFrame() {
@@ -11,7 +12,12 @@ function ImgFrame() {
           <div className="trime-frame">
             <div className="trim">
               <div className="img-frame">
-                <img src={sampleImg} className="App-logo" alt="logo" />
+                <img
+                  src={sampleImg}
+                  style={{ backgroundImage: `url(${sampleImg2})` }}
+                  className="App-logo"
+                  alt="logo"
+                />
               </div>
             </div>
           </div>
