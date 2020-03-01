@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './card-list-dashborad.scss';
-import { CharacterData, CharacterBaseData } from '../constant/character';
-import MonsterCardList from './monster-card-list';
+import { MonsterData, MonsterBaseData } from '../constant/character';
 
-const CardListDashborad: React.FC = () => {
-  const characterData = CharacterData;
-  const characterBaseData = CharacterBaseData;
+const MonsterCardList: React.FC = () => {
+  const characterData = MonsterData;
+  const characterBaseData = MonsterBaseData;
   return (
-    <div id="CardListDashborad" className="row">
+    <Fragment>
       {characterData.map((chara, index) => (
         <div className="column" key={index}>
           <div className={`card ${chara.rarity} ${chara.cardType}`}>
@@ -15,14 +14,14 @@ const CardListDashborad: React.FC = () => {
               <div className="sub-name">
                 {
                   characterBaseData.filter(
-                    base => base.characterId === chara.characterId,
+                    base => base.monsterId === chara.monsterId,
                   )[0].kanaName
                 }
               </div>
               <div className="main-name">
                 {
                   characterBaseData.filter(
-                    base => base.characterId === chara.characterId,
+                    base => base.monsterId === chara.monsterId,
                   )[0].jaName
                 }
               </div>
@@ -36,9 +35,8 @@ const CardListDashborad: React.FC = () => {
           </div>
         </div>
       ))}
-      <MonsterCardList></MonsterCardList>
-    </div>
+    </Fragment>
   );
 };
 
-export default CardListDashborad;
+export default MonsterCardList;

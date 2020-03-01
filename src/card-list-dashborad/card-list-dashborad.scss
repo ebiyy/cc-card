@@ -11,7 +11,8 @@
   .column {
     float: left;
     width: 25%;
-    padding: 0 10px;
+    border: 1px solid;
+    // padding: 0 10px;
   }
 
   /* Remove extra left and right margins, due to padding in columns */
@@ -28,9 +29,9 @@
 
   /* Style the counter cards */
   .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     /* this adds the "card" effect */
-    padding: 16px;
+    // padding: 16px;
     text-align: center;
     background-color: #f1f1f1;
   }
@@ -43,4 +44,158 @@
       margin-bottom: 20px;
     }
   }
+
+  .display-name {
+    border-bottom: 1px solid;
+    position: relative;
+    font-weight: bold;
+
+    .main-name {
+      font-size: 1.5rem;
+    }
+
+    .sub-name {
+      font-size: .8rem;
+    }
+
+    &::before {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
+
+  .battle {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      font-size: 2rem;
+      content: 'battle';
+    }
+  }
+
+  .support {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      font-size: 2rem;
+      content: 'support';
+    }
+  }
+
+  .common,
+  .uncommon {
+    background-color: gray;
+    color: white;
+  }
+
+  .uncommon {
+    color: black;
+    text-shadow: 1px 1px 1px white;
+
+    .display-name {
+      &::before {
+        content: 'Uncommon';
+      }
+    }
+  }
+
+  .rare {
+    color: white;
+    text-shadow: -1px -1px rgba(255, 255, 255, 0.33), 1px 1px rgba(0, 0, 0, 0.38);
+    background-color: silver;
+
+    .display-name {
+      &::before {
+        content: 'Rare';
+      }
+    }
+  }
+
+  .superRare {
+    background: linear-gradient(45deg, #32a6ff 0%, #3f6fff 49%, #8d54ff 82%);
+    background-size: 200%;
+    animation: aurora 10s infinite;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+
+    img {
+      background: radial-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.15));
+      background-size: 200%;
+      animation: aurora 7s infinite;
+    }
+
+    .display-name {
+      &::before {
+        content: 'Super Rare';
+      }
+    }
+  }
+
+  .ultraRare {
+    background-color: black;
+    color: gold;
+    text-shadow: 1px 1px 20px white;
+
+    .display-name {
+      &::before {
+        content: 'Ultra Rare';
+      }
+    }
+  }
+
+  .legendRare {
+    background: linear-gradient(45deg, rgb(246, 46, 36), rgb(255, 133, 27), rgb(255, 221, 0), rgb(46, 204, 64), rgb(0, 116, 217), rgb(176, 13, 201));
+    background-size: 200%;
+    animation: gba 10s infinite;
+    color: gold;
+    text-shadow: 1px 1px 1px black;
+
+    .display-name {
+      &::before {
+        content: 'Legend Rare';
+      }
+    }
+  }
+
+  @keyframes gba {
+    0% {
+      background-position: 0;
+    }
+
+    50% {
+      background-position: 100%;
+    }
+
+    100% {
+      background-position: 0;
+    }
+  }
+
+  @keyframes aurora {
+    0% {
+      background-position: left top;
+    }
+
+    25% {
+      background-position: right top;
+    }
+
+    50% {
+      background-position: right bottom;
+    }
+
+    75% {
+      background-position: left bottom;
+    }
+
+    100% {
+      background-position: left top;
+    }
+  }
+
 }
