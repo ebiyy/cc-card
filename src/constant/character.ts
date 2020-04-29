@@ -6,7 +6,7 @@ enum StatusType {
   God,
 }
 
-enum CartType {
+export enum CartType {
   Battle = 'battle',
   Support = 'support',
 }
@@ -20,7 +20,7 @@ export enum Rarity {
   LegendRare = 'legendRare',
 }
 
-interface CharacterData {
+export interface CharacterData {
   characterId: number;
   statusType: StatusType;
   rarity: Rarity;
@@ -28,7 +28,7 @@ interface CharacterData {
   cardType: CartType;
 }
 
-interface CharacterBaseData {
+export interface CharacterBaseData {
   characterId: number;
   jaName: string;
   kanaName: string;
@@ -42,8 +42,8 @@ export const MonsterBaseData = [
   },
   {
     monsterId: 2,
-    jaName: '黄金鉱龍 レゲンダ・アウレリア',
-    kanaName: 'オウゴンコウリュウ レゲンダ アウレリア',
+    jaName: '黄金鉱龍 レグ・アウレリア',
+    kanaName: 'オウゴンコウリュウ レグ アウレリア',
   },
   {
     monsterId: 3,
@@ -52,8 +52,8 @@ export const MonsterBaseData = [
   },
   {
     monsterId: 4,
-    jaName: '霊火 イリス・アレイオーン',
-    kanaName: 'レイビ イリス アレイオーン',
+    jaName: '霊火 イーリス・アレイオーン',
+    kanaName: 'レイビ イーリス アレイオーン',
   },
   {
     monsterId: 5,
@@ -67,13 +67,13 @@ export const MonsterBaseData = [
   },
   {
     monsterId: 7,
-    jaName: 'コンバット・マークⅡ',
-    kanaName: 'コンバット・マークⅡ',
+    jaName: '黒炎蝶 ギリニア',
+    kanaName: 'コクエンチョウ ギリニア',
   },
   {
     monsterId: 8,
     jaName: '監視神 メタトロン',
-    kanaName: 'カンシカン メタトロン',
+    kanaName: 'カンシジン メタトロン',
   },
   {
     monsterId: 9,
@@ -92,8 +92,8 @@ export const MonsterBaseData = [
   },
   {
     monsterId: 12,
-    jaName: '魔獣 スヴァジルファリ',
-    kanaName: 'カリュウ リントヴルム',
+    jaName: '黄光帝 グラニ・ケルピー',
+    kanaName: 'キコウテイ グラニ ケルピー',
   },
   {
     monsterId: 13,
@@ -378,7 +378,7 @@ export const MonsterData = [
   },
 ];
 
-export const CharacterBaseData: CharacterBaseData[] = [
+export const CHARACTER_BASE_DATA: CharacterBaseData[] = [
   {
     characterId: 1,
     jaName: '司馬 青',
@@ -961,7 +961,7 @@ export const CharacterBaseData: CharacterBaseData[] = [
   },
 ];
 
-export const CharacterData: CharacterData[] = [
+export const CHRACTER_DATA: CharacterData[] = [
   {
     characterId: 1,
     statusType: StatusType.Power,
@@ -3032,7 +3032,7 @@ export const CharacterData: CharacterData[] = [
     statusType: StatusType.Magica,
     rarity: Rarity.SuperRare,
     fileName: 'f334',
-    cardType: CartType.Battle,
+    cardType: CartType.Support,
   },
   {
     characterId: 106,

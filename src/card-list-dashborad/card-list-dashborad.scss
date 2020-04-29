@@ -22,7 +22,7 @@
 
   /* Clear floats after the columns */
   .row:after {
-    content: "";
+    content: '';
     display: table;
     clear: both;
   }
@@ -34,6 +34,38 @@
     // padding: 16px;
     text-align: center;
     background-color: #f1f1f1;
+
+
+
+    .rarity-class {
+      display: flex;
+      align-items: center;
+      margin: 4px 0;
+
+      &::before,
+      &::after {
+        content: '';
+        height: 1px;
+        flex-grow: 1;
+      }
+
+      p {
+        margin: 0;
+        padding: 0 5px;
+      }
+    }
+  }
+
+  .card-header {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    display: flex;
+
+    .card-type {
+      font-size: 3rem;
+      margin: 8px 10px 0;
+      height: 45px;
+    }
   }
 
   /* Responsive columns - one column layout (vertical) on small screens */
@@ -46,16 +78,25 @@
   }
 
   .display-name {
-    border-bottom: 1px solid;
+    // border-bottom: 1px solid;
     position: relative;
     font-weight: bold;
+    margin: 0 auto;
+    height: 36px;
+
+    // .card-type {
+    //   position: absolute;
+    //   top: 6px;
+    //   left: 6px;
+    //   font-size: 3.2rem;
+    // }
 
     .main-name {
       font-size: 1.5rem;
     }
 
     .sub-name {
-      font-size: .8rem;
+      font-size: 0.8rem;
     }
 
     &::before {
@@ -63,55 +104,49 @@
       right: 0;
       bottom: 0;
     }
-  }
 
-  .battle {
-    position: relative;
 
-    &::before {
-      position: absolute;
-      left: 0;
-      font-size: 2rem;
-      content: 'battle';
-    }
-  }
-
-  .support {
-    position: relative;
-
-    &::before {
-      position: absolute;
-      left: 0;
-      font-size: 2rem;
-      content: 'support';
-    }
   }
 
   .common,
   .uncommon {
     background-color: gray;
     color: white;
+
+    .rarity-class {
+
+      &::before,
+      &::after {
+        background-color: white;
+      }
+    }
   }
 
   .uncommon {
     color: black;
     text-shadow: 1px 1px 1px white;
 
-    .display-name {
-      &::before {
-        content: 'Uncommon';
+    .rarity-class {
+
+      &::before,
+      &::after {
+        background-color: black;
+        box-shadow: .5px .5px .5px white;
       }
     }
   }
 
   .rare {
     color: white;
-    text-shadow: -1px -1px rgba(255, 255, 255, 0.33), 1px 1px rgba(0, 0, 0, 0.38);
+    text-shadow: -1px -1px rgba(255, 255, 255, 0.33),
+      1px 1px rgba(0, 0, 0, 0.38);
     background-color: silver;
 
-    .display-name {
-      &::before {
-        content: 'Rare';
+    .rarity-class {
+
+      &::before,
+      &::after {
+        background-color: white;
       }
     }
   }
@@ -123,15 +158,12 @@
     color: white;
     text-shadow: 1px 1px 1px black;
 
-    img {
-      background: radial-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.15));
-      background-size: 200%;
-      animation: aurora 7s infinite;
-    }
+    .rarity-class {
 
-    .display-name {
-      &::before {
-        content: 'Super Rare';
+      &::before,
+      &::after {
+        background-color: white;
+        box-shadow: .5px .5px .5px black;
       }
     }
   }
@@ -141,23 +173,35 @@
     color: gold;
     text-shadow: 1px 1px 20px white;
 
-    .display-name {
-      &::before {
-        content: 'Ultra Rare';
+    .rarity-class {
+
+      &::before,
+      &::after {
+        background-color: gold;
+        box-shadow: .5px .5px 20px white;
       }
     }
   }
 
   .legendRare {
-    background: linear-gradient(45deg, rgb(246, 46, 36), rgb(255, 133, 27), rgb(255, 221, 0), rgb(46, 204, 64), rgb(0, 116, 217), rgb(176, 13, 201));
+    background: linear-gradient(45deg,
+        rgb(246, 46, 36),
+        rgb(255, 133, 27),
+        rgb(255, 221, 0),
+        rgb(46, 204, 64),
+        rgb(0, 116, 217),
+        rgb(176, 13, 201));
     background-size: 200%;
     animation: gba 10s infinite;
     color: gold;
     text-shadow: 1px 1px 1px black;
 
-    .display-name {
-      &::before {
-        content: 'Legend Rare';
+    .rarity-class {
+
+      &::before,
+      &::after {
+        background-color: gold;
+        text-shadow: .5px .5px .5px black;
       }
     }
   }
@@ -197,5 +241,4 @@
       background-position: left top;
     }
   }
-
 }
