@@ -1,0 +1,107 @@
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($animation-name) {
+  -webkit-animation: $animation-name;
+  -moz-animation: $animation-name;
+  animation: $animation-name;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@include keyframes(fadeIn) {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+
+  1% {
+    display: block;
+    opacity: 0;
+  }
+
+  100% {
+    display: block;
+    opacity: 1;
+  }
+}
+
+@mixin animationDuration($second) {
+  animation-duration: #{$second}s;
+  -moz-animation-duration: #{$second}s;
+  -webkit-animation-duration: #{$second}s;
+}
+
+.monster-card {
+  -webkit-flex: 1;
+  flex: 1;
+  border: 1px solid black;
+  position: relative;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+
+  .monster-img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    @include animation(fadeIn);
+    @include animationDuration(0.5);
+  }
+
+  .status-bar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    text-align: left;
+
+    ul,
+    ol {
+      padding: 0;
+      position: relative;
+      margin: 0;
+    }
+
+    ul li,
+    ol li {
+      color: #2d8fdd;
+      border-left: solid 6px #2d8fdd;
+      background: #f1f8ff;
+      margin-bottom: 3px;
+      line-height: .5;
+      padding: 0.5em;
+      padding-left: 5px;
+      padding-right: 0;
+      list-style-type: none !important;
+    }
+  }
+
+  .monster-name {
+    position: absolute;
+    bottom: 0;
+    font-size: 2rem;
+    width: 100%;
+    background-color: black;
+    color: white;
+    ;
+  }
+}

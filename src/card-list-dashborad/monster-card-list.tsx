@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import './card-list-dashborad.scss';
-import { MonsterData, MonsterBaseData } from '../constant/character';
+import { BossData, BossBaseData } from '../constant/character';
 
 const MonsterCardList: React.FC = () => {
-  const characterData = MonsterData;
-  const characterBaseData = MonsterBaseData;
+  const characterData = BossData;
+  const characterBaseData = BossBaseData;
   return (
     <Fragment>
       {characterData.map((chara, index) => (
@@ -14,14 +14,14 @@ const MonsterCardList: React.FC = () => {
               <div className="sub-name">
                 {
                   characterBaseData.filter(
-                    base => base.monsterId === chara.monsterId,
+                    base => base.bossId === chara.bossId,
                   )[0].kanaName
                 }
               </div>
               <div className="main-name">
                 {
                   characterBaseData.filter(
-                    base => base.monsterId === chara.monsterId,
+                    base => base.bossId === chara.bossId,
                   )[0].jaName
                 }
               </div>

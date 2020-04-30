@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import ImgSampleLayout from './img-sample-layout';
 import CardListDashborad from './card-list-dashborad/card-list-dashborad';
+import MainField from './main-field/main-field';
 
 function App() {
   return (
     <Fragment>
-      <CardListDashborad />
+      <MainField />
     </Fragment>
   );
 }
