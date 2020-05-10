@@ -1,0 +1,30 @@
+.arrow {
+  border-width: 5px 0 0 5px;
+  border-style: double;
+  border-color: rgba(255, 255, 255, 0);
+  border-top-left-radius: 100%;
+  z-index: 99;
+  pointer-events: none;
+
+  img {
+    position: absolute;
+    width: 140px;
+    height: 120px;
+    object-fit: cover;
+    object-position: 50% 0%;
+    left: 0;
+    bottom: 0;
+    box-shadow: 1px 1px 10px;
+  }
+
+  // .attack-icon {
+  //   content: '';
+  //   position: absolute;
+  //   border-width: 25px 20px 0;
+  //   border-style: solid;
+  //   border-color: white transparent transparent;
+  //   animation-duration: 3s;
+  //   // animation-fill-mode: forwards;
+
+  // }
+}

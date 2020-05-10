@@ -1,8 +1,18 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, {
+  useState,
+  useEffect,
+  Fragment,
+  useContext,
+  useReducer,
+  useCallback,
+} from 'react';
 import './enemy.scss';
 import { MONSTER_DATA, MONSTER_BASE_DATA } from '../../constant/monster';
-
-const fullPoint = 97;
+import { MonsterHPContext } from './enemy.context';
+import {
+  coolTimeReducer,
+  coolTimeInitialState,
+} from '../../reducer/cool-time.reducer';
 
 const monsterBaseData = MONSTER_BASE_DATA;
 const monsterData = MONSTER_DATA;
@@ -27,71 +37,76 @@ function getMonsterInfo() {
   return tempMonsterInfo;
 }
 
-const EnemyContent: React.FC = () => {
-  const [hitPoints, setHitPoints] = useState<number>();
-  const [coolTime, setCoolTime] = useState<number>();
+type Props = {
+  elmId: 'monster1' | 'monster2' | 'monster3';
+};
+
+const EnemyContent: React.FC<Props> = props => {
   const [monsterInfo, setMonsterInfo] = useState<MonsterInfo>();
   const [maxHitPoints, setMaxHitPoints] = useState<number>();
 
-  function reset() {
-    setCoolTime(0);
+  const { monsterHPState, monsterHPDispatch } = useContext(MonsterHPContext);
+
+  const [coolTimeState, coolTimeDispatch] = useReducer(
+    coolTimeReducer,
+    coolTimeInitialState,
+  );
+
+  const resetData = useCallback(() => {
+    coolTimeDispatch({ type: 'set', num: 0 });
     const tempMonsterInfo = getMonsterInfo();
     setMonsterInfo(tempMonsterInfo);
-    setHitPoints(tempMonsterInfo.hitPoints);
     setMaxHitPoints(tempMonsterInfo.hitPoints);
-  }
+    monsterHPDispatch({
+      target: props.elmId,
+      type: 'set',
+      numbers: tempMonsterInfo.hitPoints,
+    });
+  }, [monsterHPDispatch, props.elmId]);
+
+  useEffect(() => {
+    if (monsterHPState[props.elmId] <= 0) {
+      resetData();
+    }
+  }, [monsterHPState, props.elmId, resetData]);
+
+  useEffect(() => {
+    if (coolTimeState.num === 100) {
+      setTimeout(() => {
+        coolTimeDispatch({ type: 'set', num: 0 });
+      }, 200);
+    }
+  }, [coolTimeState]);
 
   useEffect(() => {
     console.log('useEffectが実行されました');
-    reset();
+    resetData();
 
     setInterval(() => {
-      setHitPoints(hitPoints => {
-        if (hitPoints !== undefined) {
-          if (hitPoints <= 0) {
-            reset();
-            return;
-          }
-          const afterHitPoints = hitPoints - 10;
-          return afterHitPoints > 0 ? afterHitPoints : 0;
-        }
-      });
-    }, 500);
-
-    setInterval(() => {
-      setCoolTime(coolTime => {
-        if (coolTime !== undefined) {
-          if (coolTime >= fullPoint) {
-            return 0;
-          }
-          const afterCoolTime = coolTime + 10;
-          return afterCoolTime === fullPoint ? 0 : afterCoolTime;
-        }
-      });
-    }, 100);
-  }, []);
+      coolTimeDispatch({ type: 'add', num: 15 });
+    }, 250);
+  }, [monsterHPDispatch, coolTimeDispatch, props.elmId, resetData]);
 
   return (
     <Fragment>
-      {monsterInfo && hitPoints && maxHitPoints ? (
+      {monsterInfo && monsterHPState[props.elmId] && maxHitPoints ? (
         <div
           className="monster-contents"
-          style={{ display: hitPoints <= 0 ? 'none' : 'block' }}
+          style={{
+            display: monsterHPState[props.elmId] <= 0 ? 'none' : 'block',
+          }}
         >
           <div className="status-bar">
             <ul>
               <li
                 style={{
-                  width: `${
-                    (hitPoints / maxHitPoints) * 100 > 97
-                      ? 97
-                      : (hitPoints / maxHitPoints) * 100
-                  }%`,
+                  width: `${(monsterHPState[props.elmId] / maxHitPoints) *
+                    100}%`,
                 }}
               >
                 HP
               </li>
-              <li style={{ width: `${coolTime}%` }}>CT</li>
+              <li style={{ width: `${coolTimeState.num}%` }}>CT</li>
             </ul>
           </div>
           <img

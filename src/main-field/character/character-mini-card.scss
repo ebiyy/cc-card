@@ -1,0 +1,158 @@
+.party-container {
+
+  .common,
+  .uncommon {
+    background-color: gray;
+    color: white;
+  }
+
+  .uncommon {
+    color: black;
+    text-shadow: 1px 1px 1px white;
+  }
+
+  .rare {
+    color: white;
+    text-shadow: -1px -1px rgba(255, 255, 255, 0.33),
+      1px 1px rgba(0, 0, 0, 0.38);
+    background-color: silver;
+  }
+
+  .superRare {
+    background: linear-gradient(45deg, #32a6ff 0%, #3f6fff 49%, #8d54ff 82%);
+    background-size: 200%;
+    animation: aurora 10s infinite;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+
+    img {
+      clip-path: inset(2%);
+    }
+  }
+
+  .ultraRare {
+    background-color: black;
+    color: gold;
+    text-shadow: 1px 1px 20px white;
+    outline: 5px ridge gold;
+    outline-offset: -5px;
+  }
+
+  .legendRare {
+    background: linear-gradient(45deg,
+        rgb(246, 46, 36),
+        rgb(255, 133, 27),
+        rgb(255, 221, 0),
+        rgb(46, 204, 64),
+        rgb(0, 116, 217),
+        rgb(176, 13, 201));
+    background-size: 200%;
+    animation: gba 10s infinite;
+    color: gold;
+    text-shadow: 1px 1px 1px black;
+
+    img {
+      clip-path: inset(2%);
+    }
+  }
+
+  @keyframes gba {
+    0% {
+      background-position: 0;
+    }
+
+    50% {
+      background-position: 100%;
+    }
+
+    100% {
+      background-position: 0;
+    }
+  }
+
+  @keyframes aurora {
+    0% {
+      background-position: left top;
+    }
+
+    25% {
+      background-position: right top;
+    }
+
+    50% {
+      background-position: right bottom;
+    }
+
+    75% {
+      background-position: left bottom;
+    }
+
+    100% {
+      background-position: left top;
+    }
+  }
+}
+
+#cardTooltip {
+  position: fixed;
+  box-shadow: 1px 1px 30px;
+  outline: 3px double black;
+  z-index: 999999;
+  pointer-events: none;
+
+  .card-tooltip-container {
+    display: flex;
+
+    .card-info {
+      width: 150px;
+      background-color: black;
+      color: white;
+    }
+  }
+
+  #cardTooltipContent {
+    width: 300px;
+    height: 500px;
+  }
+
+  .card-header {
+    height: 60px;
+
+    .card-type {
+      margin: 14px 0;
+    }
+  }
+}
+
+.pure-card {
+  position: relative;
+
+  .status-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+    text-shadow: 1px 1px 1px black;
+
+    ul,
+    ol {
+      padding: 0;
+      position: relative;
+      margin: 0;
+    }
+
+    ul li,
+    ol li {
+      color: #2d8fdd;
+      border-left: solid 6px #2d8fdd;
+      background: #f1f8ff;
+      margin-bottom: 3px;
+      line-height: .5;
+      padding: 0.5em;
+      padding-left: 5px;
+      padding-right: 0;
+      list-style-type: none !important;
+    }
+  }
+}

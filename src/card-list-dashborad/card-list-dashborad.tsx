@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './card-list-dashborad.scss';
 import {
-  CharacterData,
   CartType,
-  CHRACTER_DATA,
-  CHARACTER_BASE_DATA,
+  CHRACTER_CARDS,
+  CHARACTER_NAMES,
+  CharacterCards,
 } from '../constant/character';
-import MonsterCardList from './monster-card-list';
 import { GiCrossedSwords, GiLifeSupport } from 'react-icons/gi';
+import fitty from 'fitty';
+import { dragStart } from '../script/drag-and-drop';
 
-const RARITY = {
+export const RARITY = {
   common: 'Common',
   uncommon: 'Uncommon',
   rare: 'Rare',
@@ -18,47 +19,34 @@ const RARITY = {
   legendRare: 'Legend Rare',
 };
 
+export function getCharaName(chara: CharacterCards) {
+  return CHARACTER_NAMES.filter(
+    base => base.characterId === chara.characterId,
+  )[0].jaName;
+}
+
+export function getCharaKanaName(chara: CharacterCards) {
+  return CHARACTER_NAMES.filter(
+    base => base.characterId === chara.characterId,
+  )[0].kanaName;
+}
+
 const CardListDashborad: React.FC = () => {
-  const characterData = CHRACTER_DATA;
-  const characterBaseData = CHARACTER_BASE_DATA;
-
-  function getCharaName(chara: CharacterData) {
-    return characterBaseData.filter(
-      base => base.characterId === chara.characterId,
-    )[0].jaName;
-  }
-
-  function calcFontSize(chara: CharacterData) {
-    const charaName = getCharaName(chara);
-    if (charaName.length < 7) {
-      return { fontSize: '1.5rem' };
-    } else if (charaName.length < 9) {
-      return { fontSize: '1.3rem' };
-    } else if (charaName.length < 12) {
-      return { fontSize: '1.1rem' };
-    } else {
-      return { fontSize: '.9rem' };
-    }
-  }
-
-  function calcNamePadding(chara: CharacterData) {
-    const charaName = getCharaName(chara);
-    if (charaName.length < 7) {
-      return { paddingTop: '2px' };
-    } else if (charaName.length < 9) {
-      return { paddingTop: '5px' };
-    } else if (charaName.length < 12) {
-      return { paddingTop: '7px' };
-    } else {
-      return { paddingTop: '10px' };
-    }
-  }
+  useEffect(() => {
+    fitty('.sub-name', { minSize: 10, maxSize: 22 });
+    fitty('.main-name', { minSize: 10, maxSize: 22 });
+  });
 
   return (
     <div id="CardListDashborad" className="row">
-      {characterData.map((chara, index) => (
+      {CHRACTER_CARDS.map((chara, index) => (
         <div className="column" key={index}>
-          <div className={`card ${chara.rarity} ${chara.cardType}`}>
+          <div
+            id={chara.fileName}
+            className={`card ${chara.rarity} ${chara.cardType}`}
+            draggable="true"
+            onDragStart={event => dragStart(event)}
+          >
             <div className="card-header">
               <div className="card-type">
                 {chara.cardType === CartType.Battle ? (
@@ -68,17 +56,9 @@ const CardListDashborad: React.FC = () => {
                   <GiLifeSupport></GiLifeSupport>
                 ) : null}
               </div>
-              <div className="display-name" style={calcNamePadding(chara)}>
-                <div className="sub-name">
-                  {
-                    characterBaseData.filter(
-                      base => base.characterId === chara.characterId,
-                    )[0].kanaName
-                  }
-                </div>
-                <div className="main-name" style={calcFontSize(chara)}>
-                  {getCharaName(chara)}
-                </div>
+              <div className="display-name">
+                <div className="sub-name">{getCharaKanaName(chara)}</div>
+                <div className="main-name">{getCharaName(chara)}</div>
               </div>
             </div>
 
@@ -90,11 +70,12 @@ const CardListDashborad: React.FC = () => {
               src={`asset/image/character/${chara.fileName}.png`}
               alt="logo"
               width="100%"
+              draggable="false"
             />
           </div>
         </div>
       ))}
-      <MonsterCardList></MonsterCardList>
+      {/* <MonsterCardList></MonsterCardList> */}
     </div>
   );
 };

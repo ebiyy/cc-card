@@ -1,244 +1,261 @@
-#CardListDashborad {
-  * {
-    box-sizing: border-box;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  /* Float four columns side by side */
-  .column {
-    float: left;
-    width: 25%;
-    border: 1px solid;
-    // padding: 0 10px;
-  }
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  border: 1px solid;
+  // padding: 0 10px;
+}
 
-  /* Remove extra left and right margins, due to padding in columns */
-  .row {
-    margin: 0 -5px;
-  }
+/* Remove extra left and right margins, due to padding in columns */
+.row {
+  margin: 0 -5px;
+}
 
-  /* Clear floats after the columns */
-  .row:after {
-    content: '';
-    display: table;
-    clear: both;
-  }
+/* Clear floats after the columns */
+.row:after {
+  content: '';
+  display: table;
+  clear: both;
+}
 
-  /* Style the counter cards */
-  .card {
-    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    /* this adds the "card" effect */
-    // padding: 16px;
-    text-align: center;
-    background-color: #f1f1f1;
+/* Style the counter cards */
+.card {
+  // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* this adds the "card" effect */
+  // padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
 
-
-
-    .rarity-class {
-      display: flex;
-      align-items: center;
-      margin: 4px 0;
-
-      &::before,
-      &::after {
-        content: '';
-        height: 1px;
-        flex-grow: 1;
-      }
-
-      p {
-        margin: 0;
-        padding: 0 5px;
-      }
-    }
-  }
-
-  .card-header {
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+  .rarity-class {
     display: flex;
+    align-items: center;
+    margin: 4px 0;
 
-    .card-type {
-      font-size: 3rem;
-      margin: 8px 10px 0;
-      height: 45px;
+    &::before,
+    &::after {
+      content: '';
+      height: 1px;
+      flex-grow: 1;
+    }
+
+    p {
+      margin: 0;
+      padding: 0 5px;
+    }
+  }
+}
+
+.card-header {
+  display: -webkit-flex;
+  display: flex;
+  height: 50px;
+
+  .card-type {
+    font-size: 3rem;
+    margin: 4px 0;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+.display-name {
+  // border-bottom: 1px solid;
+  // position: relative;
+  font-weight: bold;
+  margin: 0 auto;
+  padding: 7px 2px;
+  -webkit-flex: 2;
+  flex: 2;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+
+  // .card-type {
+  //   position: absolute;
+  //   top: 6px;
+  //   left: 6px;
+  //   font-size: 3.2rem;
+  // }
+
+  .main-name {
+    font-size: 1.5rem;
+    // height: 25px;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+
+  .sub-name {
+    font-size: 0.8rem;
+    // height: 25px;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+
+  &::before {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.common,
+.uncommon {
+  background-color: gray;
+  color: white;
+
+  .rarity-class {
+
+    &::before,
+    &::after {
+      background-color: white;
+    }
+  }
+}
+
+.uncommon {
+  color: black;
+  text-shadow: 1px 1px 1px white;
+
+  .rarity-class {
+
+    &::before,
+    &::after {
+      background-color: black;
+      box-shadow: 0.5px 0.5px 0.5px white;
+    }
+  }
+}
+
+.rare {
+  color: white;
+  text-shadow: -1px -1px rgba(255, 255, 255, 0.33),
+    1px 1px rgba(0, 0, 0, 0.38);
+  background-color: silver;
+
+  .rarity-class {
+
+    &::before,
+    &::after {
+      background-color: white;
+    }
+  }
+}
+
+.superRare {
+  background: linear-gradient(45deg, #32a6ff 0%, #3f6fff 49%, #8d54ff 82%);
+  background-size: 200%;
+  animation: aurora 10s infinite;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+
+  .rarity-class {
+
+    &::before,
+    &::after {
+      background-color: white;
+      box-shadow: 0.5px 0.5px 0.5px black;
     }
   }
 
-  /* Responsive columns - one column layout (vertical) on small screens */
-  @media screen and (max-width: 600px) {
-    .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
+  img {
+    clip-path: inset(0 2%);
+  }
+}
+
+.ultraRare {
+  background-color: black;
+  color: gold;
+  text-shadow: 1px 1px 20px white;
+  outline: 5px ridge gold;
+  outline-offset: -5px;
+
+  .rarity-class {
+
+    &::before,
+    &::after {
+      background-color: gold;
+      box-shadow: 0.5px 0.5px 20px white;
+    }
+  }
+}
+
+.legendRare {
+  background: linear-gradient(45deg,
+      rgb(246, 46, 36),
+      rgb(255, 133, 27),
+      rgb(255, 221, 0),
+      rgb(46, 204, 64),
+      rgb(0, 116, 217),
+      rgb(176, 13, 201));
+  background-size: 200%;
+  animation: gba 10s infinite;
+  color: gold;
+  text-shadow: 1px 1px 1px black;
+
+  .rarity-class {
+
+    &::before,
+    &::after {
+      background-color: gold;
+      text-shadow: 0.5px 0.5px 0.5px black;
     }
   }
 
-  .display-name {
-    // border-bottom: 1px solid;
-    position: relative;
-    font-weight: bold;
-    margin: 0 auto;
-    height: 36px;
+  img {
+    clip-path: inset(0 2%);
+  }
+}
 
-    // .card-type {
-    //   position: absolute;
-    //   top: 6px;
-    //   left: 6px;
-    //   font-size: 3.2rem;
-    // }
-
-    .main-name {
-      font-size: 1.5rem;
-    }
-
-    .sub-name {
-      font-size: 0.8rem;
-    }
-
-    &::before {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-    }
-
-
+@keyframes gba {
+  0% {
+    background-position: 0;
   }
 
-  .common,
-  .uncommon {
-    background-color: gray;
-    color: white;
-
-    .rarity-class {
-
-      &::before,
-      &::after {
-        background-color: white;
-      }
-    }
+  50% {
+    background-position: 100%;
   }
 
-  .uncommon {
-    color: black;
-    text-shadow: 1px 1px 1px white;
+  100% {
+    background-position: 0;
+  }
+}
 
-    .rarity-class {
-
-      &::before,
-      &::after {
-        background-color: black;
-        box-shadow: .5px .5px .5px white;
-      }
-    }
+@keyframes aurora {
+  0% {
+    background-position: left top;
   }
 
-  .rare {
-    color: white;
-    text-shadow: -1px -1px rgba(255, 255, 255, 0.33),
-      1px 1px rgba(0, 0, 0, 0.38);
-    background-color: silver;
-
-    .rarity-class {
-
-      &::before,
-      &::after {
-        background-color: white;
-      }
-    }
+  25% {
+    background-position: right top;
   }
 
-  .superRare {
-    background: linear-gradient(45deg, #32a6ff 0%, #3f6fff 49%, #8d54ff 82%);
-    background-size: 200%;
-    animation: aurora 10s infinite;
-    color: white;
-    text-shadow: 1px 1px 1px black;
-
-    .rarity-class {
-
-      &::before,
-      &::after {
-        background-color: white;
-        box-shadow: .5px .5px .5px black;
-      }
-    }
+  50% {
+    background-position: right bottom;
   }
 
-  .ultraRare {
-    background-color: black;
-    color: gold;
-    text-shadow: 1px 1px 20px white;
-
-    .rarity-class {
-
-      &::before,
-      &::after {
-        background-color: gold;
-        box-shadow: .5px .5px 20px white;
-      }
-    }
+  75% {
+    background-position: left bottom;
   }
 
-  .legendRare {
-    background: linear-gradient(45deg,
-        rgb(246, 46, 36),
-        rgb(255, 133, 27),
-        rgb(255, 221, 0),
-        rgb(46, 204, 64),
-        rgb(0, 116, 217),
-        rgb(176, 13, 201));
-    background-size: 200%;
-    animation: gba 10s infinite;
-    color: gold;
-    text-shadow: 1px 1px 1px black;
-
-    .rarity-class {
-
-      &::before,
-      &::after {
-        background-color: gold;
-        text-shadow: .5px .5px .5px black;
-      }
-    }
-  }
-
-  @keyframes gba {
-    0% {
-      background-position: 0;
-    }
-
-    50% {
-      background-position: 100%;
-    }
-
-    100% {
-      background-position: 0;
-    }
-  }
-
-  @keyframes aurora {
-    0% {
-      background-position: left top;
-    }
-
-    25% {
-      background-position: right top;
-    }
-
-    50% {
-      background-position: right bottom;
-    }
-
-    75% {
-      background-position: left bottom;
-    }
-
-    100% {
-      background-position: left top;
-    }
+  100% {
+    background-position: left top;
   }
 }
