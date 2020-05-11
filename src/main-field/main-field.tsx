@@ -12,6 +12,7 @@ import {
   timerManagerInitialState,
   TimerManagerContext,
 } from '../context/time-manager.context';
+import Tower from './tower/tower';
 
 const MainField: React.FC = () => {
   const [cardCoiceMode, setCardCoiceMode] = useState<boolean>(false);
@@ -38,12 +39,7 @@ const MainField: React.FC = () => {
       <div className="main-container" id="gameArea">
         <HeaderField setCardCoiceMode={setCardCoiceMode} />
         <div className="flexbox">
-          {cardCoiceMode ? null : (
-            <section className="gallery">
-              <h1>Contents</h1>
-              <ul>...</ul>
-            </section>
-          )}
+          {cardCoiceMode ? null : <Tower />}
           <section className="main">
             <div className="card-container">
               <MonsterHPContext.Provider

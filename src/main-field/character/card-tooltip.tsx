@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './character-mini-card.scss';
 import {
   CartType,
@@ -16,7 +16,6 @@ import {
   RARITY,
 } from '../../card-list-dashborad/card-list-dashborad';
 import ReactDOM from 'react-dom';
-import fitty from 'fitty';
 
 const elmHeightSize = 500;
 

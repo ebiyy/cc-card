@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useReducer } from 'react';
-import { dropIt, allowDrop } from '../../script/drag-and-drop';
+import { allowDrop } from '../../script/drag-and-drop';
 import './character-mini-card.scss';
 import { CHRACTER_CARDS } from '../../constant/character';
 import CardTooltip from './card-tooltip';
@@ -174,12 +174,13 @@ const CharacterMiniCard: React.FC<Props> = props => {
         </div>
       ) : null}
       {targets && characterImgId && coolTimePerSec
-        ? targets.map(target => (
+        ? targets.map((target, index) => (
             <AttackAnimation
               target={target}
               selfElmId={props.id}
               coolTimePerSec={coolTimePerSec}
               characterImgId={characterImgId}
+              key={index}
             />
           ))
         : null}

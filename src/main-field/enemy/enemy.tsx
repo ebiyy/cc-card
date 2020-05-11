@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import './enemy.scss';
 import EnemyContent from './enemy-content';
 
