@@ -13,6 +13,7 @@ import { TimerManagerContext } from '../../context/time-manager.context';
 import AttackAnimation from './attack-animation';
 import { MAX_COOL_TIME } from '../../constant/game-setting';
 import fitty from 'fitty';
+import { AttackAnimationDispSettingContext } from './attack-animation.context';
 
 function getRarity(imgId: string) {
   return CHRACTER_CARDS.filter(chara => chara.fileName === imgId)[0].rarity;
@@ -67,6 +68,10 @@ const CharacterMiniCard: React.FC<Props> = props => {
   const { timeManagerState, timeManagerDispatch } = useContext(
     TimerManagerContext,
   );
+  const {
+    attackAnimationDispSetting,
+    setAttackAnimationDispSetting,
+  } = useContext(AttackAnimationDispSettingContext);
 
   function reset() {
     coolTimeDispatch({ type: 'set', num: 0 });
@@ -173,7 +178,7 @@ const CharacterMiniCard: React.FC<Props> = props => {
           </ul>
         </div>
       ) : null}
-      {targets && characterImgId && coolTimePerSec
+      {attackAnimationDispSetting && targets && characterImgId && coolTimePerSec
         ? targets.map((target, index) => (
             <AttackAnimation
               target={target}

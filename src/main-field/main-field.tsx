@@ -13,6 +13,10 @@ import {
   TimerManagerContext,
 } from '../context/time-manager.context';
 import Tower from './tower/tower';
+import {
+  AttackAnimationDispSettingContext,
+  attackAnimationDispSettingState,
+} from './character/attack-animation.context';
 
 const MainField: React.FC = () => {
   const [cardCoiceMode, setCardCoiceMode] = useState<boolean>(false);
@@ -23,6 +27,9 @@ const MainField: React.FC = () => {
   const [timeManagerState, timeManagerDispatch] = useReducer(
     timeManagerReducer,
     timerManagerInitialState,
+  );
+  const [attackAnimationDispSetting, setAttackAnimationDispSetting] = useState(
+    attackAnimationDispSettingState,
   );
 
   useEffect(() => {
@@ -36,33 +43,37 @@ const MainField: React.FC = () => {
     <TimerManagerContext.Provider
       value={{ timeManagerState, timeManagerDispatch }}
     >
-      <div className="main-container" id="gameArea">
-        <HeaderField setCardCoiceMode={setCardCoiceMode} />
-        <div className="flexbox">
-          {cardCoiceMode ? null : <Tower />}
-          <section className="main">
-            <div className="card-container">
-              <MonsterHPContext.Provider
-                value={{ monsterHPState, monsterHPDispatch }}
-              >
-                <Enemy />
-                <Character />
-              </MonsterHPContext.Provider>
-            </div>
-          </section>
-          {cardCoiceMode ? null : (
-            <section className="side">
-              <h1>About</h1>
-              <p>The Little Prince (French: Le Petit Prince),...</p>
+      <AttackAnimationDispSettingContext.Provider
+        value={{ attackAnimationDispSetting, setAttackAnimationDispSetting }}
+      >
+        <div className="main-container" id="gameArea">
+          <HeaderField setCardCoiceMode={setCardCoiceMode} />
+          <div className="flexbox">
+            {cardCoiceMode ? null : <Tower />}
+            <section className="main">
+              <div className="card-container">
+                <MonsterHPContext.Provider
+                  value={{ monsterHPState, monsterHPDispatch }}
+                >
+                  <Enemy />
+                  <Character />
+                </MonsterHPContext.Provider>
+              </div>
             </section>
-          )}
-          {cardCoiceMode ? (
-            <section className="cardList">
-              <CardListDashborad />
-            </section>
-          ) : null}
+            {cardCoiceMode ? null : (
+              <section className="side">
+                <h1>About</h1>
+                <p>The Little Prince (French: Le Petit Prince),...</p>
+              </section>
+            )}
+            {cardCoiceMode ? (
+              <section className="cardList">
+                <CardListDashborad />
+              </section>
+            ) : null}
+          </div>
         </div>
-      </div>
+      </AttackAnimationDispSettingContext.Provider>
     </TimerManagerContext.Provider>
   );
 };

@@ -27,6 +27,7 @@ const Tower: React.FC = () => {
       {floorHeightSize && dispTowerFloors
         ? [...Array(dispTowerFloors)].map((_, i) => (
             <div
+              key={i}
               style={{
                 height: `${floorHeightSize}px`,
               }}

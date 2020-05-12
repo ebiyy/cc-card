@@ -73,8 +73,8 @@ function CardTooltip(
           <h3>クラス</h3>
           <p>{PROFESSIONS[characterInfo.professions]}</p>
           <h3>属性</h3>
-          {characterInfo.elements.map(element => (
-            <span>{ELEMENTS[element]} </span>
+          {characterInfo.elements.map((element, i) => (
+            <span key={i}>{ELEMENTS[element]} </span>
           ))}
           <h3>設置</h3>
           <p>{GUARDS[characterInfo.guards]}</p>
