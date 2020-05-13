@@ -2,7 +2,7 @@ export interface MonsterBaseData {
   monsterId: number;
   jaName: string;
   enName: string;
-  hitPoints: number;
+  HP: number;
 }
 
 export const MONSTER_BASE_DATA: MonsterBaseData[] = [
@@ -10,67 +10,67 @@ export const MONSTER_BASE_DATA: MonsterBaseData[] = [
     monsterId: 1,
     jaName: 'ゴブリン',
     enName: 'goblin',
-    hitPoints: 50,
+    HP: 50,
   },
   {
     monsterId: 2,
     jaName: 'グリーンマン',
     enName: 'goblin',
-    hitPoints: 100,
+    HP: 100,
   },
   {
     monsterId: 3,
     jaName: '古龍',
     enName: 'ancient dragon',
-    hitPoints: 300,
+    HP: 300,
   },
   {
     monsterId: 4,
     jaName: 'ドラゴン',
     enName: 'doragon',
-    hitPoints: 200,
+    HP: 200,
   },
   {
     monsterId: 5,
     jaName: 'グレムリン',
     enName: 'gremlin',
-    hitPoints: 80,
+    HP: 80,
   },
   {
     monsterId: 6,
     jaName: 'ホブゴブリン',
     enName: 'hobgoblin',
-    hitPoints: 150,
+    HP: 150,
   },
   {
     monsterId: 7,
     jaName: 'コボルト',
     enName: 'kobold',
-    hitPoints: 80,
+    HP: 80,
   },
   {
     monsterId: 8,
     jaName: 'リーフ・ドラゴン',
     enName: 'leaf dragon',
-    hitPoints: 250,
+    HP: 250,
   },
   {
     monsterId: 9,
     jaName: 'ミノタウロス',
     enName: 'minotaur',
-    hitPoints: 200,
+    HP: 200,
   },
   {
     monsterId: 10,
     jaName: 'スモーク・ドラゴン',
     enName: 'smork dragon',
-    hitPoints: 180,
+    HP: 180,
   },
   {
     monsterId: 11,
     jaName: '三頭龍',
     enName: 'Three-headed dragon',
-    hitPoints: 500,
+    HP: 500,
   },
 ];
 

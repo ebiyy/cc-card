@@ -1,108 +1,121 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { CHRACTER_CARDS } from '../constant/character';
-import { dropIt, allowDrop } from '../script/drag-and-drop';
-import CardTooltip from '../main-field/character/card-tooltip';
+import React, {
+  useState,
+  useContext,
+  useReducer,
+  useEffect,
+  useCallback,
+} from 'react';
+import { EnemyHPContext } from '../main-field/enemy/enemy.context';
+import {
+  coolTimeReducer,
+  coolTimeInitialState,
+} from '../reducer/cool-time.reducer';
+import { TimerManagerContext } from '../context/time-manager.context';
+import { MAX_COOL_TIME } from '../constant/game-setting';
+import { HPeffect } from '../reducer/enemy-hp.reducer';
+import { CharacterHPContext } from '../main-field/character/character.context';
+import { CharacterType } from '../reducer/character-hp.reducer';
 
-function getRarity(imgId: string) {
-  return CHRACTER_CARDS.filter(chara => chara.fileName === imgId)[0].rarity;
-}
+type EnemyTargetsType = ('monster1' | 'monster2' | 'monster3')[];
 
-function resetCartTooltip() {
-  console.log('leave');
-  const cardTooltipElm = document.getElementById('cardTooltip');
-  if (cardTooltipElm) ReactDOM.unmountComponentAtNode(cardTooltipElm);
-}
+const ENEMY_TARGETS: EnemyTargetsType = ['monster1', 'monster2', 'monster3'];
 
 type Props = {
-  imgId?: string;
+  coolTimePerSec: number;
+  maxHP: number;
+  targets: EnemyTargetsType | undefined;
+  setTargets: React.Dispatch<
+    React.SetStateAction<EnemyTargetsType | undefined>
+  >;
+  characterImgId: string;
+  id: CharacterType;
 };
 
-const fullPoint = 97;
+const DAMAGE_PER_SEC = 30;
 
-const statusBar: React.FC<Props> = props => {
-  const [imgId, setImgId] = useState<string>();
-  const [maxHitPoints, setMaxHitPoints] = useState<number>();
-  const [hitPoints, setHitPoints] = useState<number>();
-  const [coolTime, setCoolTime] = useState<number>();
+export function getEnemtyTargets(targets: EnemyTargetsType) {
+  const n = Math.floor(Math.random() * (targets.length + 1));
+  const shuffledTargets = targets.sort(() => 0.5 - Math.random());
+  const selectedTargets = shuffledTargets.slice(0, n);
+  return selectedTargets;
+}
 
-  function reset() {
-    setCoolTime(0);
-    setHitPoints(100);
-    setMaxHitPoints(100);
-  }
+const StatusBar: React.FC<Props> = props => {
+  const [maxHP, setMaxHP] = useState<number>();
+  const { enemyHPState, enemyHPDispatch } = useContext(EnemyHPContext);
+
+  const [coolTimeState, coolTimeDispatch] = useReducer(
+    coolTimeReducer,
+    coolTimeInitialState,
+  );
+
+  const { timeManagerState, timeManagerDispatch } = useContext(
+    TimerManagerContext,
+  );
+  const { characterHPState, characterHPDispatch } = useContext(
+    CharacterHPContext,
+  );
+
+  const reset = useCallback(() => {
+    coolTimeDispatch({ type: 'set', num: 0 });
+    setMaxHP(props.maxHP);
+    characterHPDispatch({
+      target: props.id,
+      type: HPeffect.Set,
+      numbers: props.maxHP,
+    });
+    props.setTargets(getEnemtyTargets(ENEMY_TARGETS));
+  }, [characterHPDispatch, props]);
+
+  useEffect(() => {
+    if (characterHPState[props.id] <= 0) {
+      reset();
+    }
+  }, [characterHPState, props.id, reset]);
 
   useEffect(() => {
     reset();
-    if (props.imgId) {
-      setImgId(props.imgId);
-    }
-    setInterval(() => {
-      setHitPoints(hitPoints => {
-        if (hitPoints !== undefined) {
-          if (hitPoints <= 0) {
-            reset();
-            return;
-          }
-          const afterHitPoints = hitPoints - 10;
-          return afterHitPoints > 0 ? afterHitPoints : 0;
-        }
-      });
-    }, 50000);
+  }, [props.characterImgId]);
 
-    setInterval(() => {
-      setCoolTime(coolTime => {
-        if (coolTime !== undefined) {
-          if (coolTime >= fullPoint) {
-            return 0;
-          }
-          const afterCoolTime = coolTime + 10;
-          return afterCoolTime === fullPoint ? 0 : afterCoolTime;
-        }
-      });
-    }, 10000);
-  }, [props.imgId]);
+  useEffect(() => {
+    coolTimeDispatch({ type: 'add', num: props.coolTimePerSec });
+  }, [timeManagerState, props.coolTimePerSec]);
+
+  useEffect(() => {
+    if (coolTimeState.num === MAX_COOL_TIME) {
+      if (props.targets && props.targets.length > 0) {
+        props.targets.forEach(target => {
+          if (enemyHPState[target])
+            enemyHPDispatch({
+              target,
+              type: HPeffect.Sub,
+              numbers: DAMAGE_PER_SEC,
+            });
+        });
+      }
+      coolTimeDispatch({ type: 'set', num: 0 });
+      props.setTargets(getEnemtyTargets(ENEMY_TARGETS));
+    }
+  }, [coolTimeState, enemyHPDispatch, enemyHPState, props]);
 
   return (
-    <div
-      className={`pure-card ${imgId ? getRarity(imgId) : ''}`}
-      onDrop={event => setImgId(dropIt(event))}
-      onDragOver={event => allowDrop(event)}
-      onMouseEnter={event => {
-        console.log('enter');
-        return imgId ? CardTooltip(imgId, event) : null;
-      }}
-      onMouseLeave={() => resetCartTooltip()}
-    >
-      {imgId ? (
-        <img
-          src={`asset/image/character/${imgId}.png`}
-          alt="character-card"
-          width="100%"
-        />
-      ) : (
-        '❶'
-      )}
-      {maxHitPoints && hitPoints ? (
+    <>
+      {maxHP && characterHPState && characterHPState[props.id] ? (
         <div className="status-bar">
           <ul>
             <li
               style={{
-                width: `${
-                  (hitPoints / maxHitPoints) * 100 > 97
-                    ? 97
-                    : (hitPoints / maxHitPoints) * 100
-                }%`,
+                width: `${(characterHPState[props.id] / maxHP) * 100}%`,
               }}
             >
               HP
             </li>
-            <li style={{ width: `${coolTime}%` }}>CT</li>
+            <li style={{ width: `${coolTimeState.num}%` }}>CT</li>
           </ul>
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 
-export default statusBar;
+export default StatusBar;

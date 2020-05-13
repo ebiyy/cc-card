@@ -5,8 +5,8 @@ import Character from './character/character';
 import CardListDashborad from '../card-list-dashborad/card-list-dashborad';
 import HeaderField from './header/header-field';
 
-import { monsterHPinitialState, MonsterHPContext } from './enemy/enemy.context';
-import { monsterHPReducer } from '../reducer/monster-hp.reducer';
+import { enemyHPinitialState, EnemyHPContext } from './enemy/enemy.context';
+import { enemyHPReducer } from '../reducer/enemy-hp.reducer';
 import { timeManagerReducer } from '../reducer/time-manager.reducer';
 import {
   timerManagerInitialState,
@@ -17,12 +17,21 @@ import {
   AttackAnimationDispSettingContext,
   attackAnimationDispSettingState,
 } from './character/attack-animation.context';
+import { characterHPReducer } from '../reducer/character-hp.reducer';
+import {
+  characterHPinitialState,
+  CharacterHPContext,
+} from './character/character.context';
 
 const MainField: React.FC = () => {
   const [cardCoiceMode, setCardCoiceMode] = useState<boolean>(false);
-  const [monsterHPState, monsterHPDispatch] = useReducer(
-    monsterHPReducer,
-    monsterHPinitialState,
+  const [enemyHPState, enemyHPDispatch] = useReducer(
+    enemyHPReducer,
+    enemyHPinitialState,
+  );
+  const [characterHPState, characterHPDispatch] = useReducer(
+    characterHPReducer,
+    characterHPinitialState,
   );
   const [timeManagerState, timeManagerDispatch] = useReducer(
     timeManagerReducer,
@@ -52,12 +61,16 @@ const MainField: React.FC = () => {
             {cardCoiceMode ? null : <Tower />}
             <section className="main">
               <div className="card-container">
-                <MonsterHPContext.Provider
-                  value={{ monsterHPState, monsterHPDispatch }}
+                <EnemyHPContext.Provider
+                  value={{ enemyHPState, enemyHPDispatch }}
                 >
-                  <Enemy />
-                  <Character />
-                </MonsterHPContext.Provider>
+                  <CharacterHPContext.Provider
+                    value={{ characterHPState, characterHPDispatch }}
+                  >
+                    <Enemy />
+                    <Character />
+                  </CharacterHPContext.Provider>
+                </EnemyHPContext.Provider>
               </div>
             </section>
             {cardCoiceMode ? null : (

@@ -1,19 +1,12 @@
-import React, { useState, useEffect, useContext, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import { allowDrop } from '../../script/drag-and-drop';
 import './character-mini-card.scss';
 import { CHRACTER_CARDS } from '../../constant/character';
 import CardTooltip from './card-tooltip';
 import ReactDOM from 'react-dom';
-import { MonsterHPContext } from '../enemy/enemy.context';
-import {
-  coolTimeReducer,
-  coolTimeInitialState,
-} from '../../reducer/cool-time.reducer';
-import { TimerManagerContext } from '../../context/time-manager.context';
-import AttackAnimation from './attack-animation';
-import { MAX_COOL_TIME } from '../../constant/game-setting';
 import fitty from 'fitty';
-import { AttackAnimationDispSettingContext } from './attack-animation.context';
+import BattleManager from '../../elements/battle-manager';
+import { CharacterType } from '../../reducer/character-hp.reducer';
 
 function getRarity(imgId: string) {
   return CHRACTER_CARDS.filter(chara => chara.fileName === imgId)[0].rarity;
@@ -25,77 +18,19 @@ function resetCartTooltip() {
   if (cardTooltipElm) ReactDOM.unmountComponentAtNode(cardTooltipElm);
 }
 
-const TARGETS: ('monster1' | 'monster2' | 'monster3')[] = [
-  'monster1',
-  'monster2',
-  'monster3',
-];
-
 type Props = {
   characterImgId?: string;
-  id: string;
+  id: CharacterType;
 };
-
-// const coolTimeVar = 10;
-const characterHP = 100;
-const damagePerSec = 0.1;
-
-const coolTimeArray = [5, 20, 5, 10, 15, 30].map(val => val * 1);
-
-function getTargets() {
-  const n = Math.floor(Math.random() * (TARGETS.length + 1));
-  const shuffledTargets = TARGETS.sort(() => 0.5 - Math.random());
-  const selectedTargets = shuffledTargets.slice(0, n);
-  return selectedTargets;
-}
 
 const CharacterMiniCard: React.FC<Props> = props => {
   const [characterImgId, setCharacterImgId] = useState<string>();
-  const [selfHP, setselfHP] = useState<number>();
-  const [selfCurrentHP, setSelfCurrentHP] = useState<number>();
-  const [targets, setTargets] = useState<
-    ('monster1' | 'monster2' | 'monster3')[]
-  >();
-  const [coolTimePerSec, setCoolTimePerSec] = useState<number>();
-
-  const { monsterHPState, monsterHPDispatch } = useContext(MonsterHPContext);
-
-  const [coolTimeState, coolTimeDispatch] = useReducer(
-    coolTimeReducer,
-    coolTimeInitialState,
-  );
-
-  const { timeManagerState, timeManagerDispatch } = useContext(
-    TimerManagerContext,
-  );
-  const {
-    attackAnimationDispSetting,
-    setAttackAnimationDispSetting,
-  } = useContext(AttackAnimationDispSettingContext);
-
-  function reset() {
-    coolTimeDispatch({ type: 'set', num: 0 });
-    setSelfCurrentHP(characterHP);
-    setselfHP(characterHP);
-    setTargets(getTargets());
-  }
 
   function getDropCharacterInfo(ev: any) {
     ev.preventDefault(); // default is not to allow drop
     let dropElmId = ev.dataTransfer.getData('text/plain');
     let characterImgElm = document.getElementById(dropElmId);
-    if (characterImgElm) {
-      getCoolTimePerSec(characterImgElm?.id);
-    }
     return characterImgElm?.id;
-  }
-
-  function getCoolTimePerSec(characterImgId: string) {
-    const characterCard = CHRACTER_CARDS.filter(
-      character => character.fileName === characterImgId,
-    )[0];
-    const coolTimePerSec = coolTimeArray[characterCard.ranks];
-    setCoolTimePerSec(coolTimePerSec);
   }
 
   // TODO:タイミング検討
@@ -105,43 +40,10 @@ const CharacterMiniCard: React.FC<Props> = props => {
   });
 
   useEffect(() => {
-    reset();
     if (props.characterImgId) {
       setCharacterImgId(props.characterImgId);
-      getCoolTimePerSec(props.characterImgId);
     }
-    setInterval(() => {
-      setSelfCurrentHP(selfCurrentHP => {
-        if (selfCurrentHP !== undefined) {
-          if (selfCurrentHP <= 0) {
-            reset();
-            return;
-          }
-          const nextHP = selfCurrentHP - damagePerSec;
-          return nextHP > 0 ? nextHP : 0;
-        }
-      });
-    }, 50000);
   }, [props.characterImgId]);
-
-  useEffect(() => {
-    if (coolTimePerSec) {
-      coolTimeDispatch({ type: 'add', num: coolTimePerSec });
-    }
-  }, [timeManagerState, coolTimePerSec]);
-
-  useEffect(() => {
-    if (coolTimeState.num === MAX_COOL_TIME) {
-      if (targets && targets.length > 0) {
-        targets.forEach(target => {
-          if (monsterHPState[target])
-            monsterHPDispatch({ target: target, type: 'sub', numbers: 1 });
-        });
-      }
-      coolTimeDispatch({ type: 'set', num: 0 });
-      setTargets(getTargets());
-    }
-  }, [coolTimeState, monsterHPDispatch, monsterHPState, targets]);
 
   return (
     <div
@@ -164,31 +66,9 @@ const CharacterMiniCard: React.FC<Props> = props => {
       ) : (
         '❶'
       )}
-      {selfHP && selfCurrentHP ? (
-        <div className="status-bar">
-          <ul>
-            <li
-              style={{
-                width: `${(selfCurrentHP / selfHP) * 100}%`,
-              }}
-            >
-              HP
-            </li>
-            <li style={{ width: `${coolTimeState.num}%` }}>CT</li>
-          </ul>
-        </div>
+      {characterImgId ? (
+        <BattleManager characterImgId={characterImgId} id={props.id} />
       ) : null}
-      {attackAnimationDispSetting && targets && characterImgId && coolTimePerSec
-        ? targets.map((target, index) => (
-            <AttackAnimation
-              target={target}
-              selfElmId={props.id}
-              coolTimePerSec={coolTimePerSec}
-              characterImgId={characterImgId}
-              key={index}
-            />
-          ))
-        : null}
     </div>
   );
 };
