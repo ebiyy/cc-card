@@ -1,5 +1,16 @@
 $header-height: 75px;
 
+@mixin flexNum($num) {
+  -webkit-flex: $num;
+  flex: $num;
+}
+
+@mixin singleFlex {
+  display: -webkit-flex;
+  display: flex;
+  @include flexNum(1)
+}
+
 .main-container {
   height: 100%;
   min-height: 100%;
@@ -9,8 +20,12 @@ $header-height: 75px;
   }
 
   header {
-    background-color: lightgreen;
+    background-color: black;
+    color: white;
     height: $header-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   @media (min-width: 600px) {
@@ -23,8 +38,7 @@ $header-height: 75px;
 
     .main {
       margin: 0 10px;
-      -webkit-flex: 3;
-      flex: 3;
+      @include flexNum(3);
       background-color: lightgoldenrodyellow;
 
       .card-container {
@@ -35,43 +49,32 @@ $header-height: 75px;
         min-height: 100%;
 
         .enemy-container {
-          -webkit-flex: 1;
-          flex: 1;
+          @include singleFlex;
           background-color: lightpink;
-          display: -webkit-flex;
-          display: flex;
+          // TODO: 可変にする
+          background-image: url(../asset/img/cave.png);
+          // http://teddy-plaza.sakura.ne.jp/?cat=105
         }
 
         .party-container {
-          -webkit-flex: 1;
-          flex: 1;
+          @include singleFlex;
           background-color: lightslategrey;
-          display: -webkit-flex;
-          display: flex;
           flex-direction: column;
 
           .avant-garde-container {
-            -webkit-flex: 1;
-            flex: 1;
+            @include singleFlex;
             background-color: lightcyan;
-            display: -webkit-flex;
-            display: flex;
           }
 
           .rear-guard-container {
-            -webkit-flex: 1;
-            flex: 1;
+            @include singleFlex;
             background-color: lightgreen;
-            display: -webkit-flex;
-            display: flex;
           }
         }
 
         .pure-card {
-          -webkit-flex: 1;
-          flex: 1;
+          @include singleFlex;
           border: 1px solid black;
-          display: flex;
           justify-content: center;
           align-items: center;
           flex-direction: column;
@@ -89,21 +92,26 @@ $header-height: 75px;
     }
 
     .side {
-      -webkit-flex: 1;
-      flex: 1;
-      background-color: lightsalmon;
+      @include flexNum(1);
+      background-color: red;
+      color: white;
+
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 20%;
+        border: 1px solid white
+      }
     }
 
     .gallery {
-      -webkit-flex: 1;
-      flex: 1;
-      background-color: lightblue;
+      @include flexNum(1);
     }
 
     .cardList {
-      -webkit-flex: 3;
-      flex: 3;
-      background-color: lightblue;
+      @include flexNum(3);
       overflow-y: scroll;
       overflow-x: hidden;
     }

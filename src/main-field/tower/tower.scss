@@ -2,16 +2,18 @@
   display: flex;
   flex-direction: column-reverse;
   flex-wrap: wrap;
+  background-image: url(http://teddy-plaza.sakura.ne.jp/wp/wp-content/uploads/2016/07/17bcf097e846da68a07785405923e805.png);
+  background-size: cover;
 
   div {
-    background: black;
+    background: white;
     width: 60%;
     margin: auto;
     height: 10%;
     border: 1px solid white;
     border-top: none;
-    box-shadow: 1px 1px 10px;
-    color: white;
+    box-shadow: 1px 1px 1px;
+    color: black;
     display: flex;
     align-items: center;
     justify-content: center;

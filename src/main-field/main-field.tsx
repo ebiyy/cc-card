@@ -73,17 +73,34 @@ const MainField: React.FC = () => {
                 </EnemyHPContext.Provider>
               </div>
             </section>
-            {cardCoiceMode ? null : (
-              <section className="side">
-                <h1>About</h1>
-                <p>The Little Prince (French: Le Petit Prince),...</p>
-              </section>
-            )}
             {cardCoiceMode ? (
               <section className="cardList">
                 <CardListDashborad />
               </section>
-            ) : null}
+            ) : (
+              <section className="side">
+                <div>
+                  <h1>Current Floors</h1>
+                  <p>The Little Prince (French: Le Petit Prince),...</p>
+                </div>
+                <div>
+                  <h1>2nd Town</h1>
+                  <p>The Little Prince (French: Le Petit Prince),...</p>
+                </div>
+                <div>
+                  <h1>3rd Town</h1>
+                  <p>The Little Prince (French: Le Petit Prince),...</p>
+                </div>
+                <div>
+                  <h1>Other Group Floors</h1>
+                  <p>The Little Prince (French: Le Petit Prince),...</p>
+                </div>
+                <div>
+                  <h1>Training Room</h1>
+                  <p>The Little Prince (French: Le Petit Prince),...</p>
+                </div>
+              </section>
+            )}
           </div>
         </div>
       </AttackAnimationDispSettingContext.Provider>

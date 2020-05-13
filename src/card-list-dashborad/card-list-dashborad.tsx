@@ -37,6 +37,8 @@ const CardListDashborad: React.FC = () => {
     fitty('.main-name', { minSize: 10, maxSize: 22 });
   });
 
+  // これやる
+  // [Using Hooks for Lazy-Loading Images in React - Better Programming - Medium](https://medium.com/better-programming/image-lazy-loading-in-react-intersection-observer-a9ae912ddafe)
   return (
     <div id="CardListDashborad" className="row">
       {CHRACTER_CARDS.map((chara, index) => (

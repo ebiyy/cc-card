@@ -66,6 +66,8 @@
     margin: auto;
     @include animation(fadeIn);
     @include animationDuration(0.5);
+
+    filter: drop-shadow(3px 3px 5px cyan);
   }
 
   .status-bar {
