@@ -18,6 +18,8 @@ import { MAX_COOL_TIME } from '../../constant/game-setting';
 import { CharacterHPContext } from '../character/character.context';
 import { CharacterType } from '../../reducer/character-hp.reducer';
 import { TimerManagerContext } from '../../context/time-manager.context';
+import { EnemyKillCountContext } from '../../context/enemy-kill-count.context';
+import { reducerActionType } from '../../reducer/enemy-kill-count.reducer';
 
 const monsterBaseData = MONSTER_BASE_DATA;
 const monsterData = MONSTER_DATA;
@@ -83,6 +85,9 @@ const EnemyContent: React.FC<Props> = props => {
   const { timeManagerState, timeManagerDispatch } = useContext(
     TimerManagerContext,
   );
+  const { enemyKillCountState, enemyKillCountDispatch } = useContext(
+    EnemyKillCountContext,
+  );
 
   const resetData = useCallback(() => {
     coolTimeDispatch({ type: 'set', num: 0 });
@@ -98,9 +103,10 @@ const EnemyContent: React.FC<Props> = props => {
 
   useEffect(() => {
     if (enemyHPState[props.elmId] <= 0) {
+      enemyKillCountDispatch({ type: reducerActionType.Add, num: 1 });
       resetData();
     }
-  }, [enemyHPState, props.elmId, resetData]);
+  }, [enemyHPState, props.elmId, resetData, enemyKillCountDispatch]);
 
   useEffect(() => {
     if (coolTimeState.num === MAX_COOL_TIME) {

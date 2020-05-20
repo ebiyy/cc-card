@@ -52,8 +52,13 @@ $header-height: 75px;
           @include singleFlex;
           background-color: lightpink;
           // TODO: 可変にする
-          background-image: url(../asset/img/cave.png);
+          background-image: url(../asset/img/dungeon/d033.jpg);
           // http://teddy-plaza.sakura.ne.jp/?cat=105
+          background-position: center bottom;
+          background-repeat: no-repeat;
+          background-size: cover;
+          // background-color: rgba(255, 255, 255, 0.3);
+          // background-blend-mode: lighten;
         }
 
         .party-container {
@@ -93,7 +98,7 @@ $header-height: 75px;
 
     .side {
       @include flexNum(1);
-      background-color: red;
+      background-color: darkblue;
       color: white;
 
       div {

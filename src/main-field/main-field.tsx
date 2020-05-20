@@ -22,6 +22,16 @@ import {
   characterHPinitialState,
   CharacterHPContext,
 } from './character/character.context';
+import { enemyKillCountReducer } from '../reducer/enemy-kill-count.reducer';
+import {
+  enemyKillCountInitialState,
+  EnemyKillCountContext,
+} from '../context/enemy-kill-count.context';
+import {
+  CurrentFloor,
+  CurrentFloorProvider,
+  INIT_CURRENT_FLOOR,
+} from '../context/current-floor';
 
 const MainField: React.FC = () => {
   const [cardCoiceMode, setCardCoiceMode] = useState<boolean>(false);
@@ -37,8 +47,15 @@ const MainField: React.FC = () => {
     timeManagerReducer,
     timerManagerInitialState,
   );
+  const [enemyKillCountState, enemyKillCountDispatch] = useReducer(
+    enemyKillCountReducer,
+    enemyKillCountInitialState,
+  );
   const [attackAnimationDispSetting, setAttackAnimationDispSetting] = useState(
     attackAnimationDispSettingState,
+  );
+  const [currentFloor, setCurrentFloor] = useState<CurrentFloor>(
+    INIT_CURRENT_FLOOR,
   );
 
   useEffect(() => {
@@ -55,54 +72,60 @@ const MainField: React.FC = () => {
       <AttackAnimationDispSettingContext.Provider
         value={{ attackAnimationDispSetting, setAttackAnimationDispSetting }}
       >
-        <div className="main-container" id="gameArea">
-          <HeaderField setCardCoiceMode={setCardCoiceMode} />
-          <div className="flexbox">
-            {cardCoiceMode ? null : <Tower />}
-            <section className="main">
-              <div className="card-container">
-                <EnemyHPContext.Provider
-                  value={{ enemyHPState, enemyHPDispatch }}
-                >
-                  <CharacterHPContext.Provider
-                    value={{ characterHPState, characterHPDispatch }}
-                  >
-                    <Enemy />
-                    <Character />
-                  </CharacterHPContext.Provider>
-                </EnemyHPContext.Provider>
+        <EnemyKillCountContext.Provider
+          value={{ enemyKillCountState, enemyKillCountDispatch }}
+        >
+          <CurrentFloorProvider value={[currentFloor, setCurrentFloor]}>
+            <div className="main-container" id="gameArea">
+              <HeaderField setCardCoiceMode={setCardCoiceMode} />
+              <div className="flexbox">
+                {cardCoiceMode ? null : <Tower />}
+                <section className="main">
+                  <div className="card-container">
+                    <EnemyHPContext.Provider
+                      value={{ enemyHPState, enemyHPDispatch }}
+                    >
+                      <CharacterHPContext.Provider
+                        value={{ characterHPState, characterHPDispatch }}
+                      >
+                        <Enemy />
+                        <Character />
+                      </CharacterHPContext.Provider>
+                    </EnemyHPContext.Provider>
+                  </div>
+                </section>
+                {cardCoiceMode ? (
+                  <section className="cardList">
+                    <CardListDashborad />
+                  </section>
+                ) : (
+                  <section className="side">
+                    <div>
+                      <h1>Current Floors</h1>
+                      <p>The Little Prince (French: Le Petit Prince),...</p>
+                    </div>
+                    <div>
+                      <h1>2nd Town</h1>
+                      <p>The Little Prince (French: Le Petit Prince),...</p>
+                    </div>
+                    <div>
+                      <h1>3rd Town</h1>
+                      <p>The Little Prince (French: Le Petit Prince),...</p>
+                    </div>
+                    <div>
+                      <h1>Other Group Floors</h1>
+                      <p>The Little Prince (French: Le Petit Prince),...</p>
+                    </div>
+                    <div>
+                      <h1>Training Room</h1>
+                      <p>The Little Prince (French: Le Petit Prince),...</p>
+                    </div>
+                  </section>
+                )}
               </div>
-            </section>
-            {cardCoiceMode ? (
-              <section className="cardList">
-                <CardListDashborad />
-              </section>
-            ) : (
-              <section className="side">
-                <div>
-                  <h1>Current Floors</h1>
-                  <p>The Little Prince (French: Le Petit Prince),...</p>
-                </div>
-                <div>
-                  <h1>2nd Town</h1>
-                  <p>The Little Prince (French: Le Petit Prince),...</p>
-                </div>
-                <div>
-                  <h1>3rd Town</h1>
-                  <p>The Little Prince (French: Le Petit Prince),...</p>
-                </div>
-                <div>
-                  <h1>Other Group Floors</h1>
-                  <p>The Little Prince (French: Le Petit Prince),...</p>
-                </div>
-                <div>
-                  <h1>Training Room</h1>
-                  <p>The Little Prince (French: Le Petit Prince),...</p>
-                </div>
-              </section>
-            )}
-          </div>
-        </div>
+            </div>
+          </CurrentFloorProvider>
+        </EnemyKillCountContext.Provider>
       </AttackAnimationDispSettingContext.Provider>
     </TimerManagerContext.Provider>
   );
