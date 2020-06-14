@@ -58,7 +58,7 @@ const AttackAnimation: React.FC<Props> = props => {
           return (
             <div className="arrow" style={arrowElmStyle}>
               <img
-                src={`asset/image/icon/${props.characterImgId}.png`}
+                src={`asset/img/icon/${props.characterImgId}.png`}
                 alt="icon"
                 className="attack-icon"
                 style={{

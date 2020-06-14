@@ -1,8 +1,8 @@
 import { CHRACTER_CARDS } from '../constant/character';
 import React, { useState, useEffect, useContext } from 'react';
 import StatusBar from './status-bar';
-import AttackAnimation from '../main-field/character/attack-animation';
-import { AttackAnimationDispSettingContext } from '../main-field/character/attack-animation.context';
+import AttackAnimation from '../domain/character/attack-animation';
+import { AttackAnimationDispSettingContext } from '../domain/character/attack-animation.context';
 import { CharacterType } from '../reducer/character-hp.reducer';
 
 type Props = {

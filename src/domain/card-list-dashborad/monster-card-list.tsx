@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import './card-list-dashborad.scss';
-import { BossData, BossBaseData } from '../constant/character';
+import { BossData, BossBaseData } from '../../constant/character';
 
 const MonsterCardList: React.FC = () => {
   const characterData = BossData;
@@ -28,7 +28,7 @@ const MonsterCardList: React.FC = () => {
             </div>
 
             <img
-              src={`asset/image/character/${chara.fileName}.png`}
+              src={`asset/img/character/${chara.fileName}.png`}
               alt="logo"
               width="100%"
             />

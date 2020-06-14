@@ -152,7 +152,7 @@ const EnemyContent: React.FC<Props> = props => {
           </div>
           <img
             className="monster-img"
-            src={require(`../../asset/img/${monsterInfo.imgFileName}.png`)}
+            src={require(`asset/img/${monsterInfo.imgFileName}.png`)}
             alt="monster-img"
           />
           <div className="monster-name">{monsterInfo.jaName}</div>

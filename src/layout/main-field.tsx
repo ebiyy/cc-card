@@ -1,27 +1,30 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import './main-field.scss';
-import Enemy from './enemy/enemy';
-import Character from './character/character';
-import CardListDashborad from '../card-list-dashborad/card-list-dashborad';
-import HeaderField from './header/header-field';
+import Enemy from '../domain/enemy/enemy';
+import Character from '../domain/character/character';
+import CardListDashborad from '../domain/card-list-dashborad/card-list-dashborad';
+import HeaderField from '../domain/header/header-field';
 
-import { enemyHPinitialState, EnemyHPContext } from './enemy/enemy.context';
+import {
+  enemyHPinitialState,
+  EnemyHPContext,
+} from '../domain/enemy/enemy.context';
 import { enemyHPReducer } from '../reducer/enemy-hp.reducer';
 import { timeManagerReducer } from '../reducer/time-manager.reducer';
 import {
   timerManagerInitialState,
   TimerManagerContext,
 } from '../context/time-manager.context';
-import Tower from './tower/tower';
+import Tower from '../domain/tower/tower';
 import {
   AttackAnimationDispSettingContext,
   attackAnimationDispSettingState,
-} from './character/attack-animation.context';
+} from '../domain/character/attack-animation.context';
 import { characterHPReducer } from '../reducer/character-hp.reducer';
 import {
   characterHPinitialState,
   CharacterHPContext,
-} from './character/character.context';
+} from '../domain/character/character.context';
 import { enemyKillCountReducer } from '../reducer/enemy-kill-count.reducer';
 import {
   enemyKillCountInitialState,
@@ -32,7 +35,7 @@ import {
   CurrentFloorProvider,
   INIT_CURRENT_FLOOR,
 } from '../context/current-floor';
-import ParallelUniverse from './parallel-universe/parallel-universe';
+import ParallelUniverse from '../domain/parallel-universe/parallel-universe';
 
 const MainField: React.FC = () => {
   const [cardCoiceMode, setCardCoiceMode] = useState<boolean>(false);

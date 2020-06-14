@@ -5,10 +5,10 @@ import {
   CHRACTER_CARDS,
   CHARACTER_NAMES,
   CharacterCards,
-} from '../constant/character';
+} from '../../constant/character';
 import { GiCrossedSwords, GiLifeSupport } from 'react-icons/gi';
 import fitty from 'fitty';
-import { dragStart } from '../script/drag-and-drop';
+import { dragStart } from '../../services/drag-and-drop';
 
 export const RARITY = {
   common: 'Common',
@@ -69,7 +69,7 @@ const CardListDashborad: React.FC = () => {
             </div>
 
             <img
-              src={`asset/image/character/${chara.fileName}.png`}
+              src={`asset/img/character/${chara.fileName}.png`}
               alt="logo"
               width="100%"
               draggable="false"

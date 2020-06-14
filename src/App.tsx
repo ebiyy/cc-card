@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import MainField from './main-field/main-field';
+import MainField from './layout/main-field';
 
 function App() {
   return (

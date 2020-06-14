@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "asset/*": ["./asset/*"]
+    }
+  }
+}
+
+// [VS Code + create-react-app v3でtsconfig.jsonのpathsを使用する - Qiita](https://qiita.com/nbkn/items/32a7de99a594ffcd0d9e)
+//　参考

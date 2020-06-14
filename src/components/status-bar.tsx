@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { EnemyHPContext } from '../main-field/enemy/enemy.context';
+import { EnemyHPContext } from '../domain/enemy/enemy.context';
 import {
   coolTimeReducer,
   coolTimeInitialState,
@@ -13,7 +13,7 @@ import {
 import { TimerManagerContext } from '../context/time-manager.context';
 import { MAX_COOL_TIME } from '../constant/game-setting';
 import { HPeffect } from '../reducer/enemy-hp.reducer';
-import { CharacterHPContext } from '../main-field/character/character.context';
+import { CharacterHPContext } from '../domain/character/character.context';
 import { CharacterType } from '../reducer/character-hp.reducer';
 
 type EnemyTargetsType = ('monster1' | 'monster2' | 'monster3')[];

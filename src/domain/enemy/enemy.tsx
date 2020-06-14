@@ -25,7 +25,7 @@ const Enemy: React.FC = () => {
     <section
       className="enemy-container"
       style={{
-        backgroundImage: `url(${require(`../../asset/img/dungeon/${DUNGEON_DATA[resetCount].imgFileNmae}`)})`,
+        backgroundImage: `url(${require(`asset/img/dungeon/${DUNGEON_DATA[resetCount].imgFileNmae}`)})`,
       }}
     >
       <div id="monster1" className="monster-card">

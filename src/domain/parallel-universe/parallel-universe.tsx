@@ -1,6 +1,5 @@
 import React, { useState, useEffect, CSSProperties, useContext } from 'react';
 import './parallel-universe.scss';
-import caveImg from '../../asset/img/dungeon/d001.jpg';
 import { EnemyKillCountContext } from '../../context/enemy-kill-count.context';
 import { reducerActionType } from '../../reducer/enemy-kill-count.reducer';
 import { GiChest } from 'react-icons/gi';
@@ -83,7 +82,7 @@ const ParallelUniverse: React.FC = () => {
     <section
       className="gallery"
       style={{
-        backgroundImage: `url(${require(`../../asset/img/dungeon/${DUNGEON_DATA[resetCount].imgFileNmae}`)})`,
+        backgroundImage: `url(${require(`asset/img/dungeon/${DUNGEON_DATA[resetCount].imgFileNmae}`)})`,
         backgroundSize: 'cover',
       }}
     >

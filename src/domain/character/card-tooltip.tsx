@@ -14,7 +14,7 @@ import {
   getCharaKanaName,
   getCharaName,
   RARITY,
-} from '../../card-list-dashborad/card-list-dashborad';
+} from '../card-list-dashborad/card-list-dashborad';
 import ReactDOM from 'react-dom';
 
 const elmHeightSize = 500;
@@ -61,7 +61,7 @@ function CardTooltip(
             <p>{RARITY[characterInfo.rarity]}</p>
           </div>
           <img
-            src={`asset/image/character/${characterInfo.fileName}.png`}
+            src={require(`asset/img/character/${characterInfo.fileName}.png`)}
             alt="logo"
             width="100%"
             draggable="false"

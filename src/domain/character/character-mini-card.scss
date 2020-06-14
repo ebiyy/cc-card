@@ -1,5 +1,9 @@
 .party-container {
 
+  img {
+    filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, .5));
+  }
+
   .common,
   .uncommon {
     background-color: gray;
@@ -99,6 +103,10 @@
   outline: 3px double black;
   z-index: 999999;
   pointer-events: none;
+
+  img {
+    filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, .5));
+  }
 
   .card-tooltip-container {
     display: flex;

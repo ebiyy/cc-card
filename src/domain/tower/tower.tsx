@@ -1,6 +1,5 @@
 import React, { useState, useEffect, CSSProperties, useContext } from 'react';
 import './tower.scss';
-import caveImg from '../../asset/img/dungeon/d001.jpg';
 import { EnemyKillCountContext } from '../../context/enemy-kill-count.context';
 import { reducerActionType } from '../../reducer/enemy-kill-count.reducer';
 import { GiChest } from 'react-icons/gi';
@@ -22,7 +21,7 @@ const Tower: React.FC = () => {
 
   const floorStyle: CSSProperties = {
     // backgroundImage: `url(${caveImg})`,
-    backgroundImage: `url(${require(`../../asset/img/dungeon/d${zeroPadding(
+    backgroundImage: `url(${require(`asset/img/dungeon/d${zeroPadding(
       currentFloor.num + 1,
       3,
     )}.jpg`)})`,

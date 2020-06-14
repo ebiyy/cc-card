@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { allowDrop } from '../../script/drag-and-drop';
+import { allowDrop } from '../../services/drag-and-drop';
 import './character-mini-card.scss';
 import { CHRACTER_CARDS } from '../../constant/character';
 import CardTooltip from './card-tooltip';
 import ReactDOM from 'react-dom';
 import fitty from 'fitty';
-import BattleManager from '../../elements/battle-manager';
+import BattleManager from '../../components/battle-manager';
 import { CharacterType } from '../../reducer/character-hp.reducer';
 
 function getRarity(imgId: string) {
@@ -52,7 +52,7 @@ const CharacterMiniCard: React.FC<Props> = props => {
     >
       {characterImgId ? (
         <img
-          src={`asset/image/character/${characterImgId}.png`}
+          src={require(`asset/img/character/${characterImgId}.png`)}
           alt="character-card"
           width="100%"
           onDrop={event => setCharacterImgId(getDropCharacterInfo(event))}

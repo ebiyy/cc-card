@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.scss';
-import { dropIt, allowDrop, dragStart } from '../../script/drag-and-drop';
+import { dropIt, allowDrop, dragStart } from '../../services/drag-and-drop';
 
 const DragAndDrop: React.FC = () => {
   return (
