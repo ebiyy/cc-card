@@ -32,6 +32,7 @@ import {
   CurrentFloorProvider,
   INIT_CURRENT_FLOOR,
 } from '../context/current-floor';
+import ParallelUniverse from './parallel-universe/parallel-universe';
 
 const MainField: React.FC = () => {
   const [cardCoiceMode, setCardCoiceMode] = useState<boolean>(false);
@@ -52,7 +53,7 @@ const MainField: React.FC = () => {
     enemyKillCountInitialState,
   );
   const [attackAnimationDispSetting, setAttackAnimationDispSetting] = useState(
-    attackAnimationDispSettingState,
+    false,
   );
   const [currentFloor, setCurrentFloor] = useState<CurrentFloor>(
     INIT_CURRENT_FLOOR,
@@ -79,7 +80,11 @@ const MainField: React.FC = () => {
             <div className="main-container" id="gameArea">
               <HeaderField setCardCoiceMode={setCardCoiceMode} />
               <div className="flexbox">
-                {cardCoiceMode ? null : <Tower />}
+                {cardCoiceMode ? (
+                  <section className="gallery"></section>
+                ) : (
+                  <ParallelUniverse />
+                )}
                 <section className="main">
                   <div className="card-container">
                     <EnemyHPContext.Provider
