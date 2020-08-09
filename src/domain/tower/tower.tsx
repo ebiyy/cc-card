@@ -3,8 +3,8 @@ import './tower.scss';
 import { EnemyKillCountContext } from '../../context/enemy-kill-count.context';
 import { reducerActionType } from '../../reducer/enemy-kill-count.reducer';
 import { GiChest } from 'react-icons/gi';
-import CurrentFloorContext from '../../context/current-floor';
 import { zeroPadding } from '../enemy/enemy';
+import { CurrentFloorContext } from 'context';
 
 const minFloorHeightSize = 150;
 

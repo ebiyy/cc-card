@@ -1,7 +1,7 @@
 import {
   CharacterHPStateType,
   CharacterHPActionType,
-} from '../../reducer/character-hp.reducer';
+} from '../reducer/character-hp.reducer';
 import { createContext } from 'react';
 
 type CharacterHPContextType = {
@@ -9,7 +9,7 @@ type CharacterHPContextType = {
   characterHPDispatch: React.Dispatch<CharacterHPActionType>;
 };
 
-export const characterHPinitialState = {
+export const characterHPInitState = {
   vanguard1: 0,
   vanguard2: 0,
   vanguard3: 0,

@@ -1,12 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import MainField from './layout/main-field';
 
 function App() {
-  return (
-    <Fragment>
-      <MainField />
-    </Fragment>
-  );
+  return <MainField />;
 }
 
 export default App;

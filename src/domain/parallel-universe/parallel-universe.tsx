@@ -1,12 +1,9 @@
 import React, { useState, useEffect, CSSProperties, useContext } from 'react';
 import './parallel-universe.scss';
 import { EnemyKillCountContext } from '../../context/enemy-kill-count.context';
-import { reducerActionType } from '../../reducer/enemy-kill-count.reducer';
-import { GiChest } from 'react-icons/gi';
-import CurrentFloorContext from '../../context/current-floor';
-import { zeroPadding } from '../enemy/enemy';
 import Wave from 'react-wavify';
 import { DUNGEON_DATA } from '../../constant/dungeon';
+import { CurrentFloorContext } from 'context';
 
 const minFloorHeightSize = 150;
 

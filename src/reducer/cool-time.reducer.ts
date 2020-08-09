@@ -7,7 +7,7 @@ export type CoolTimeActionType = {
   num: number;
 };
 
-export const coolTimeInitialState = { num: 0 };
+export const coolTimeInitState = { num: 0 };
 
 export const coolTimeReducer = (
   state: CoolTimeStateType,

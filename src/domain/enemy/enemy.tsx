@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './enemy.scss';
 import EnemyContent from './enemy-content';
-import CurrentFloorContext from '../../context/current-floor';
 import { EnemyKillCountContext } from '../../context/enemy-kill-count.context';
 import { DUNGEON_DATA } from '../../constant/dungeon';
 

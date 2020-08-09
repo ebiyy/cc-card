@@ -1,4 +1,4 @@
-$header-height: 75px;
+@import "../variables";
 
 @mixin flexNum($num) {
   -webkit-flex: $num;
@@ -18,15 +18,6 @@ $header-height: 75px;
 
   body>& {
     height: auto;
-  }
-
-  header {
-    background-color: black;
-    color: white;
-    height: $header-height;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   @media (min-width: 600px) {

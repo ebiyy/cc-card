@@ -2,7 +2,7 @@ import { CHRACTER_CARDS } from '../constant/character';
 import React, { useState, useEffect, useContext } from 'react';
 import StatusBar from './status-bar';
 import AttackAnimation from '../domain/character/attack-animation';
-import { AttackAnimationDispSettingContext } from '../domain/character/attack-animation.context';
+import { AtackAnimationToggleContext } from '../context/attack-animation.context';
 import { CharacterType } from '../reducer/character-hp.reducer';
 
 type Props = {
@@ -17,10 +17,9 @@ const BattleManager: React.FC<Props> = props => {
     ('monster1' | 'monster2' | 'monster3')[]
   >();
   const [coolTimePerSec, setCoolTimePerSec] = useState<number>();
-  const {
-    attackAnimationDispSetting,
-    setAttackAnimationDispSetting,
-  } = useContext(AttackAnimationDispSettingContext);
+  const { atackAnimationToggle, setatackAnimationToggle } = useContext(
+    AtackAnimationToggleContext,
+  );
 
   function getCoolTimePerSec(characterImgId: string) {
     const characterCard = CHRACTER_CARDS.filter(
@@ -49,7 +48,7 @@ const BattleManager: React.FC<Props> = props => {
           id={props.id}
         />
       ) : null}
-      {attackAnimationDispSetting && targets && coolTimePerSec
+      {atackAnimationToggle && targets && coolTimePerSec
         ? targets.map((target, index) => (
             <AttackAnimation
               target={target}

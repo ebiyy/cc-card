@@ -5,15 +5,15 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { EnemyHPContext } from '../domain/enemy/enemy.context';
+import { EnemyHPContext } from '../context/enemy.context';
 import {
   coolTimeReducer,
-  coolTimeInitialState,
+  coolTimeInitState,
 } from '../reducer/cool-time.reducer';
 import { TimerManagerContext } from '../context/time-manager.context';
 import { MAX_COOL_TIME } from '../constant/game-setting';
 import { HPeffect } from '../reducer/enemy-hp.reducer';
-import { CharacterHPContext } from '../domain/character/character.context';
+import { CharacterHPContext } from '../context/character.context';
 import { CharacterType } from '../reducer/character-hp.reducer';
 
 type EnemyTargetsType = ('monster1' | 'monster2' | 'monster3')[];
@@ -46,7 +46,7 @@ const StatusBar: React.FC<Props> = props => {
 
   const [coolTimeState, coolTimeDispatch] = useReducer(
     coolTimeReducer,
-    coolTimeInitialState,
+    coolTimeInitState,
   );
 
   const { timeManagerState, timeManagerDispatch } = useContext(

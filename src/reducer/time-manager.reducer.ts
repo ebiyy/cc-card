@@ -7,7 +7,7 @@ export type TimeManagerActionType = {
   timer: number;
 };
 
-export const timeManagerInitialState = { timer: 0 };
+export const timeManagerInitState = { timer: 0 };
 
 export const timeManagerReducer = (
   state: TimeManagerStateType,

@@ -1,10 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
-import sampleImg from '../asset/img/f354_n.png';
-import sampleImg2 from '../asset/img/shinpi_RARE_back.png';
-import './img-sample.scss';
 
-const cardDesign: React.FC = () => {
+const CardDesign: React.FC = () => {
   return (
     <div className="App frame">
       <header className="App-header">
@@ -13,8 +10,10 @@ const cardDesign: React.FC = () => {
             <div className="trim">
               <div className="img-frame">
                 <img
-                  src={sampleImg}
-                  style={{ backgroundImage: `url(${sampleImg2})` }}
+                  src={require('asset/img/f354_n.png')}
+                  style={{
+                    backgroundImage: `url(${require('asset/img/shinpi_RARE_back.png')})`,
+                  }}
                   className="App-logo"
                   alt="logo"
                 />
@@ -27,4 +26,4 @@ const cardDesign: React.FC = () => {
   );
 };
 
-export default cardDesign;
+export default CardDesign;

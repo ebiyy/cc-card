@@ -4,7 +4,7 @@ export interface CurrentFloor {
   num: number;
 }
 
-export const INIT_CURRENT_FLOOR: CurrentFloor = {
+const currentFloorInitState: CurrentFloor = {
   num: 0,
 };
 
@@ -15,6 +15,4 @@ const CurrentFloorContext = React.createContext<
   {} as React.Dispatch<React.SetStateAction<CurrentFloor>>,
 ]);
 
-export const CurrentFloorProvider = CurrentFloorContext.Provider;
-export const CurrentFloorConsumer = CurrentFloorContext.Consumer;
-export default CurrentFloorContext;
+export { CurrentFloorContext, currentFloorInitState };

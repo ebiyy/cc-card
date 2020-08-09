@@ -1006,8 +1006,8 @@ export const CHARACTER_NAMES: CharacterNames[] = [
   },
   {
     characterId: 96,
-    jaName: '織田 銀次',
-    kanaName: 'オダ ギンジ',
+    jaName: '織田 銀',
+    kanaName: 'オダ ギン',
   },
   {
     characterId: 97,
@@ -1051,7 +1051,7 @@ export const CHARACTER_NAMES: CharacterNames[] = [
   },
   {
     characterId: 105,
-    jaName: '未羅 せせり',
+    jaName: '未羅 セセリ',
     kanaName: 'ミラ セセリ',
   },
   {

@@ -8,18 +8,18 @@ import React, {
 } from 'react';
 import './enemy.scss';
 import { MONSTER_DATA, MONSTER_BASE_DATA } from '../../constant/monster';
-import { EnemyHPContext } from './enemy.context';
 import {
   coolTimeReducer,
-  coolTimeInitialState,
+  coolTimeInitState,
 } from '../../reducer/cool-time.reducer';
 import { HPeffect } from '../../reducer/enemy-hp.reducer';
 import { MAX_COOL_TIME } from '../../constant/game-setting';
-import { CharacterHPContext } from '../character/character.context';
+import { CharacterHPContext } from '../../context/character.context';
 import { CharacterType } from '../../reducer/character-hp.reducer';
 import { TimerManagerContext } from '../../context/time-manager.context';
 import { EnemyKillCountContext } from '../../context/enemy-kill-count.context';
 import { reducerActionType } from '../../reducer/enemy-kill-count.reducer';
+import { EnemyHPContext } from 'context';
 
 const monsterBaseData = MONSTER_BASE_DATA;
 const monsterData = MONSTER_DATA;
@@ -75,7 +75,7 @@ const EnemyContent: React.FC<Props> = props => {
   const [maxHP, setMaxHP] = useState<number>();
   const [coolTimeState, coolTimeDispatch] = useReducer(
     coolTimeReducer,
-    coolTimeInitialState,
+    coolTimeInitState,
   );
   const { enemyHPState, enemyHPDispatch } = useContext(EnemyHPContext);
   const { characterHPState, characterHPDispatch } = useContext(

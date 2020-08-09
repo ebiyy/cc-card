@@ -1,7 +1,7 @@
 import {
   EnemyHPStateType,
   EnemyHPActionType,
-} from '../../reducer/enemy-hp.reducer';
+} from '../reducer/enemy-hp.reducer';
 import { createContext } from 'react';
 
 type EnemyHPContextType = {
@@ -9,6 +9,6 @@ type EnemyHPContextType = {
   enemyHPDispatch: React.Dispatch<EnemyHPActionType>;
 };
 
-export const enemyHPinitialState = { monster1: 0, monster2: 0, monster3: 0 };
+export const enemyHPInitState = { monster1: 0, monster2: 0, monster3: 0 };
 
 export const EnemyHPContext = createContext({} as EnemyHPContextType);

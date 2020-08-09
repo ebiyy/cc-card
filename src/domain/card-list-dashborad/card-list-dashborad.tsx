@@ -32,13 +32,16 @@ export function getCharaKanaName(chara: CharacterCards) {
 }
 
 const CardListDashborad: React.FC = () => {
-  useEffect(() => {
-    fitty('.sub-name', { minSize: 10, maxSize: 22 });
-    fitty('.main-name', { minSize: 10, maxSize: 22 });
-  });
+  const [loaded, setLoaded] = React.useState(false);
+
+  // useEffect(() => {
+  //   fitty('.sub-name', { minSize: 10, maxSize: 22 });
+  //   fitty('.main-name', { minSize: 10, maxSize: 22 });
+  // });
 
   // これやる
   // [Using Hooks for Lazy-Loading Images in React - Better Programming - Medium](https://medium.com/better-programming/image-lazy-loading-in-react-intersection-observer-a9ae912ddafe)
+  // todo: 文字数からクラス名を決めてフォントサイズ決める（fittyは重すぎる
   return (
     <div id="CardListDashborad" className="row">
       {CHRACTER_CARDS.map((chara, index) => (
@@ -69,7 +72,7 @@ const CardListDashborad: React.FC = () => {
             </div>
 
             <img
-              src={`asset/img/character/${chara.fileName}.png`}
+              src={require(`asset/img/character/${chara.fileName}.png`)}
               alt="logo"
               width="100%"
               draggable="false"
